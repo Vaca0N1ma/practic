@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище companyPracticModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="employeer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="experience" Type="int" Nullable="false" />
+          <Property Name="id_role" Type="int" />
+          <Property Name="login" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="topic" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="info" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="status" Type="int" />
+          <Property Name="id_author" Type="int" />
+          <Property Name="id_responsible" Type="int" />
+          <Property Name="image" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="task_status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="user_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__employeer__id_ro__398D8EEE">
+          <End Role="user_role" Type="Self.user_role" Multiplicity="0..1" />
+          <End Role="employeer" Type="Self.employeer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employeer">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__id_author__4222D4EF">
+          <End Role="employeer" Type="Self.employeer" Multiplicity="0..1" />
+          <End Role="task" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employeer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="id_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__id_respons__4316F928">
+          <End Role="employeer" Type="Self.employeer" Multiplicity="0..1" />
+          <End Role="task" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employeer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="id_responsible" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__status__412EB0B6">
+          <End Role="task_status" Type="Self.task_status" Multiplicity="0..1" />
+          <End Role="task" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="task_status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище companyPracticModelContainer">
+          <EntitySet Name="employeer" EntityType="Self.employeer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="task" EntityType="Self.task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="task_status" EntityType="Self.task_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_role" EntityType="Self.user_role" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__employeer__id_ro__398D8EEE" Association="Self.FK__employeer__id_ro__398D8EEE">
+            <End Role="user_role" EntitySet="user_role" />
+            <End Role="employeer" EntitySet="employeer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__id_author__4222D4EF" Association="Self.FK__task__id_author__4222D4EF">
+            <End Role="employeer" EntitySet="employeer" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__id_respons__4316F928" Association="Self.FK__task__id_respons__4316F928">
+            <End Role="employeer" EntitySet="employeer" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__status__412EB0B6" Association="Self.FK__task__status__412EB0B6">
+            <End Role="task_status" EntitySet="task_status" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="companyPracticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="employeer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="experience" Type="Int32" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="user_role" Relationship="Self.FK__employeer__id_ro__398D8EEE" FromRole="employeer" ToRole="user_role" />
+          <NavigationProperty Name="task" Relationship="Self.FK__task__id_author__4222D4EF" FromRole="employeer" ToRole="task" />
+          <NavigationProperty Name="task1" Relationship="Self.FK__task__id_respons__4316F928" FromRole="employeer" ToRole="task" />
+        </EntityType>
+        <EntityType Name="task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="topic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="info" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employeer" Relationship="Self.FK__task__id_author__4222D4EF" FromRole="task" ToRole="employeer" />
+          <NavigationProperty Name="employeer1" Relationship="Self.FK__task__id_respons__4316F928" FromRole="task" ToRole="employeer" />
+          <NavigationProperty Name="task_status" Relationship="Self.FK__task__status__412EB0B6" FromRole="task" ToRole="task_status" />
+        </EntityType>
+        <EntityType Name="task_status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="task" Relationship="Self.FK__task__status__412EB0B6" FromRole="task_status" ToRole="task" />
+        </EntityType>
+        <EntityType Name="user_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="employeer" Relationship="Self.FK__employeer__id_ro__398D8EEE" FromRole="user_role" ToRole="employeer" />
+        </EntityType>
+        <Association Name="FK__employeer__id_ro__398D8EEE">
+          <End Role="user_role" Type="Self.user_role" Multiplicity="0..1" />
+          <End Role="employeer" Type="Self.employeer" Multiplicity="*" />
+        </Association>
+        <Association Name="FK__task__id_author__4222D4EF">
+          <End Role="employeer" Type="Self.employeer" Multiplicity="0..1" />
+          <End Role="task" Type="Self.task" Multiplicity="*" />
+        </Association>
+        <Association Name="FK__task__id_respons__4316F928">
+          <End Role="employeer" Type="Self.employeer" Multiplicity="0..1" />
+          <End Role="task" Type="Self.task" Multiplicity="*" />
+        </Association>
+        <Association Name="FK__task__status__412EB0B6">
+          <End Role="task_status" Type="Self.task_status" Multiplicity="0..1" />
+          <End Role="task" Type="Self.task" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Tables" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="employeer" EntityType="Self.employeer" />
+          <EntitySet Name="task" EntityType="Self.task" />
+          <EntitySet Name="task_status" EntityType="Self.task_status" />
+          <EntitySet Name="user_role" EntityType="Self.user_role" />
+          <AssociationSet Name="FK__employeer__id_ro__398D8EEE" Association="Self.FK__employeer__id_ro__398D8EEE">
+            <End Role="user_role" EntitySet="user_role" />
+            <End Role="employeer" EntitySet="employeer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__id_author__4222D4EF" Association="Self.FK__task__id_author__4222D4EF">
+            <End Role="employeer" EntitySet="employeer" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__id_respons__4316F928" Association="Self.FK__task__id_respons__4316F928">
+            <End Role="employeer" EntitySet="employeer" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__status__412EB0B6" Association="Self.FK__task__status__412EB0B6">
+            <End Role="task_status" EntitySet="task_status" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище companyPracticModelContainer" CdmEntityContainer="Tables">
+          <EntitySetMapping Name="employeer">
+            <EntityTypeMapping TypeName="companyPracticModel.employeer">
+              <MappingFragment StoreEntitySet="employeer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="task">
+            <EntityTypeMapping TypeName="companyPracticModel.task">
+              <MappingFragment StoreEntitySet="task">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="topic" ColumnName="topic" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="task_status">
+            <EntityTypeMapping TypeName="companyPracticModel.task_status">
+              <MappingFragment StoreEntitySet="task_status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_role">
+            <EntityTypeMapping TypeName="companyPracticModel.user_role">
+              <MappingFragment StoreEntitySet="user_role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK__employeer__id_ro__398D8EEE" TypeName="companyPracticModel.FK__employeer__id_ro__398D8EEE" StoreEntitySet="employeer">
+            <EndProperty Name="user_role">
+              <ScalarProperty Name="id" ColumnName="id_role" />
+            </EndProperty>
+            <EndProperty Name="employeer">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="id_role" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK__task__id_author__4222D4EF" TypeName="companyPracticModel.FK__task__id_author__4222D4EF" StoreEntitySet="task">
+            <EndProperty Name="employeer">
+              <ScalarProperty Name="id" ColumnName="id_author" />
+            </EndProperty>
+            <EndProperty Name="task">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="id_author" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK__task__id_respons__4316F928" TypeName="companyPracticModel.FK__task__id_respons__4316F928" StoreEntitySet="task">
+            <EndProperty Name="employeer">
+              <ScalarProperty Name="id" ColumnName="id_responsible" />
+            </EndProperty>
+            <EndProperty Name="task">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="id_responsible" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK__task__status__412EB0B6" TypeName="companyPracticModel.FK__task__status__412EB0B6" StoreEntitySet="task">
+            <EndProperty Name="task_status">
+              <ScalarProperty Name="id" ColumnName="status" />
+            </EndProperty>
+            <EndProperty Name="task">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="status" />
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

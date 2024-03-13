@@ -1,0 +1,24 @@
+﻿<Window x:Class="practic.dutyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:practic"
+        mc:Ignorable="d"
+        Title="Создание проектов" Height="450" Width="800">
+    <Grid Background="#bde0fe">
+        <TextBox Name="topicBox" HorizontalAlignment="Left" Margin="53,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="347" Height="30"/>
+        <Label Content="Тема проекта" HorizontalAlignment="Left" Margin="53,73,0,0" VerticalAlignment="Top" FontSize="15" Width="152"/>
+        <TextBox Name="infoBox" HorizontalAlignment="Left" Margin="53,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="347" Height="200"/>
+        <Label Content="Описание обращения" HorizontalAlignment="Left" Margin="53,153,0,0" VerticalAlignment="Top" FontSize="15" Width="194"/>
+        <Label Content="Создание проекта программистам" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" FontSize="20" Width="336"/>
+        <ComboBox Name="dutyCB" HorizontalAlignment="Left" Margin="465,108,0,0" VerticalAlignment="Top" Width="213" Height="30"/>
+        <Label Content="Ответственный за проблему" HorizontalAlignment="Left" Margin="465,73,0,0" VerticalAlignment="Top" FontSize="15" Width="213"/>
+        <Button Content="Отправить проект" HorizontalAlignment="Left" Margin="596,361,0,0" VerticalAlignment="Top" Height="45" Width="124" Click="createTicket"/>
+        <TextBox x:Name="userNameLabel" HorizontalAlignment="Left" Margin="566,10,0,0" VerticalAlignment="Top" Width="182" IsReadOnly="True"/>
+        <Button Content="Выйти" HorizontalAlignment="Left" Margin="693,36,0,0" VerticalAlignment="Top" Width="55" Click="logout"/>
+        <Label Content="Изображение Банка" HorizontalAlignment="Left" Margin="465,153,0,0" VerticalAlignment="Top" FontSize="15" Width="168"/>
+        <Image Name="errorScreenshot" HorizontalAlignment="Left" Height="158" Margin="465,188,0,0" VerticalAlignment="Top" Width="295"/>
+
+    </Grid>
+</Window>
